@@ -1,0 +1,71 @@
+﻿<div class="main-container">
+  <h2>New Customer</h2>
+  <form [formGroup]="formGroup" (submit)="save()" #mainForm="ngForm" #mainForm="ngForm" novalidate>
+    <div>
+      <label for="name">Name</label>
+    </div>
+    <div>
+      <input type="text" class="input" formControlName="name" id="name" maxlength="5"/>
+    </div>
+    <div>
+      <span class="required"
+            *ngIf="formGroup.controls['name'].hasError('required')">This
+        field is required</span>
+
+    </div>
+    <div class="gap">
+    </div>
+    <div>
+      <label for="type">Engineer</label>
+    </div>
+    <div>
+      <select formControlName="type" id="type" class="input">
+        <option [ngValue]="null" selected>Please select</option>
+        <option [ngValue]="1">Large</option>
+        <option [ngValue]="2">Small</option>
+      </select>
+    </div>
+    <div>
+      <span class="required"
+            *ngIf="formGroup.controls['type'].hasError('required')">This
+        field is required</span>
+    </div>
+    <div class="gap">
+    </div>
+    <div>
+      <button type="submit">Add Customer</button>
+    </div>
+  </form>
+  <div class="gap">
+  </div>
+  <table>
+    <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Type
+      </th>
+      <th>
+
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let customer of customers">
+      <td>
+        {{customer.name}}
+      </td>
+      <td>
+        {{getTypeText(customer.type)}}
+      </td>
+      <td>
+        <a [routerLink]="['/customer', customer.customerId]">Open</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
