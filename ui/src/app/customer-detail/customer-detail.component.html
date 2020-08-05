@@ -1,6 +1,6 @@
 ﻿<div class="main-container" *ngIf="customer">
   <p>Name: {{customer.name}}</p>
-  <p>Type: {{customer.type}}</p>
+  <p>Type: {{customer.type|enumText:CustomerType}}</p>
   <a [routerLink]="['/customers']">Back</a>
 </div>
 

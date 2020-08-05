@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using AutoMapper;
 using DeveloperTest.Business.Interfaces;
 using DeveloperTest.Database;
 using DeveloperTest.Database.Models;
@@ -9,10 +10,12 @@ namespace DeveloperTest.Business
     public class JobService : IJobService
     {
         private readonly ApplicationDbContext context;
+        private readonly IMapper _mapper;
 
-        public JobService(ApplicationDbContext context)
+        public JobService(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
+            _mapper = mapper;
         }
 
         public JobModel[] GetJobs()
@@ -21,7 +24,8 @@ namespace DeveloperTest.Business
             {
                 JobId = x.JobId,
                 Engineer = x.Engineer,
-                When = x.When
+                When = x.When,
+                Customer = _mapper.Map<CustomerModel>(x.Customer)
             }).ToArray();
         }
 
@@ -31,7 +35,8 @@ namespace DeveloperTest.Business
             {
                 JobId = x.JobId,
                 Engineer = x.Engineer,
-                When = x.When
+                When = x.When,
+                Customer = _mapper.Map<CustomerModel>(x.Customer)
             }).SingleOrDefault();
         }
 
@@ -40,7 +45,8 @@ namespace DeveloperTest.Business
             var addedJob = context.Jobs.Add(new Job
             {
                 Engineer = model.Engineer,
-                When = model.When
+                When = model.When,
+                CustomerId = model.CustomerId
             });
 
             context.SaveChanges();
@@ -49,7 +55,7 @@ namespace DeveloperTest.Business
             {
                 JobId = addedJob.Entity.JobId,
                 Engineer = addedJob.Entity.Engineer,
-                When = addedJob.Entity.When
+                When = addedJob.Entity.When,
             };
         }
     }

@@ -12,7 +12,6 @@ namespace DeveloperTest.Database
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -33,8 +32,12 @@ namespace DeveloperTest.Database
                 {
                     JobId = 1,
                     Engineer = "Test",
-                    When = DateTime.Now
+                    When = DateTime.Now,
                 });
+
+            modelBuilder.Entity<Job>()
+                .HasOne(p => p.Customer)
+                .WithMany(p => p.Jobs);
         }
     }
 }

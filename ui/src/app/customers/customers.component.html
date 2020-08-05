@@ -19,6 +19,7 @@
       <label for="type">Engineer</label>
     </div>
     <div>
+      <!--We may create a pipe to read the values from the array or we can directly read it from serverside, there are some other alternatives-->
       <select formControlName="type" id="type" class="input">
         <option [ngValue]="null" selected>Please select</option>
         <option [ngValue]="1">Large</option>
@@ -58,7 +59,7 @@
         {{customer.name}}
       </td>
       <td>
-        {{getTypeText(customer.type)}}
+        {{customer.type|enumText:CustomerType}}
       </td>
       <td>
         <a [routerLink]="['/customer', customer.customerId]">Open</a>

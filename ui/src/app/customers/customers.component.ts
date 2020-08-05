@@ -2,7 +2,7 @@
 import {CustomerService} from '../services/customer.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CustomerModel} from '../models/customer.model';
-import {CustomerType} from "../models/enums/customer-type.enum";
+import {CustomerType} from '../models/enums/customer-type.enum';
 
 @Component({
   selector: 'app-customers',
@@ -13,6 +13,7 @@ export class CustomersComponent implements OnInit {
 
   customers: CustomerModel[] = [];
   formGroup: FormGroup;
+  CustomerType = CustomerType;
 
   constructor(private customerService: CustomerService, private formBuilder: FormBuilder) {
     this.createFormGroup();
@@ -33,13 +34,6 @@ export class CustomersComponent implements OnInit {
       name: [null, [Validators.required, Validators.maxLength(5)]],
       type: [null, Validators.required]
     });
-  }
-
-  getTypeText(type: CustomerType) {
-    if (type === CustomerType.Large) {
-      return 'Large';
-    }
-    return 'Small';
   }
 
   save() {

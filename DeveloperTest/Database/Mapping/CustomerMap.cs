@@ -1,4 +1,5 @@
-﻿using DeveloperTest.Database.Models;
+﻿using DeveloperTest.Database.Enums;
+using DeveloperTest.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,7 +16,6 @@ namespace DeveloperTest.Database.Mapping
             builder.Property(p => p.Name)
                 .IsRequired()
                 .HasMaxLength(5);
-
         }
     }
 }
